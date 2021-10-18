@@ -1,0 +1,64 @@
+{
+  "profiles": [
+    {
+      "id": 1,
+      "profileName": "1 Profile",
+      "profileStatus": "Active",
+      "creationDate": "02-12-2021",
+      "currency": "124",
+      "progress": "23",
+      "percentage": "48",
+      "image": "https://icons.iconarchive.com/icons/toma4025/rumax/32/monitor-icon.png"
+    },
+    {
+      "id": 2,
+      "profileName": "2 Profile",
+      "profileStatus": "Paused",
+      "creationDate": "03-10-2020",
+      "currency": "12435",
+      "progress": "72",
+      "percentage": "33",
+      "image": "https://icons.iconarchive.com/icons/toma4025/rumax/32/folder-users-icon.png"
+    },
+    {
+      "id": 3,
+      "profileName": "3 Profile",
+      "profileStatus": "Active",
+      "creationDate": "04-10-2021",
+      "currency": "1124",
+      "progress": "85",
+      "percentage": "25",
+      "image": "https://icons.iconarchive.com/icons/toma4025/rumax/32/filetype-ai-icon.png"
+    },
+    {
+      "id": 4,
+      "profileName": "4 Profile",
+      "profileStatus": "Paused",
+      "creationDate": "05-12-2020",
+      "currency": "1235",
+      "progress": "33",
+      "percentage": "20",
+      "image": "https://icons.iconarchive.com/icons/toma4025/rumax/32/filetype-psd-icon.png"
+    },
+    {
+      "id": 5,
+      "profileName": "5 Profile",
+      "profileStatus": "Active",
+      "creationDate": "06-12-2021",
+      "currency": "1289",
+      "progress": "23",
+      "percentage": "15",
+      "image": "https://icons.iconarchive.com/icons/toma4025/rumax/32/filetype-mp-3-icon.png"
+    },
+    {
+      "id": 6,
+      "profileName": "6 Profile",
+      "profileStatus": "Paused",
+      "creationDate": "03-12-2020",
+      "currency": "135",
+      "progress": "42",
+      "percentage": "55",
+      "image": "https://icons.iconarchive.com/icons/toma4025/rumax/32/filetype-bmp-icon.png"
+    }
+  ]
+}
