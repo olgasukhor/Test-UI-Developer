@@ -55,34 +55,39 @@ function AppTable() {
     const [row, setRow] = useState([]);
     let history = useHistory();
 
-    let profilesNew = [];
 
-    const checkedColumnsNew = () => {
-        let element = [];
-        for (let i = 0; i < row.length; i++) {
-            element.push(row[i].id)
-        }
-        let checkedColumns = element.join(', ');
+    // Неудачная попытка отфильтровать массив profiles  
+    // Через MySQL просто написала бы команду "SELECT checkedColumns FROM profiles", 
+    // и повесила бы функцию на кнопку Aply, но я пошла другим путем и заблудилась.
 
-        for (let i = 0; i < profiles.length; i++) {
-            const element = profiles[i];
-            const keys = Object.keys(element).filter(key => checkedColumns.includes(key));
-            const sortedObj = Object.fromEntries(
-                keys.map(key => [key, element[key]])
-            );
-            profilesNew.push(sortedObj)
-        }
-        setProfiles(profilesNew)
-        return profiles
-    }
+    // let profilesNew = [];
+
+    // const checkedColumnsNew = () => {
+    //     let element = [];
+    //     for (let i = 0; i < row.length; i++) {
+    //         element.push(row[i].id)
+    //     }
+    //     let checkedColumns = element.join(', ');
+
+    //     for (let i = 0; i < profiles.length; i++) {
+    //         const element = profiles[i];
+    //         const keys = Object.keys(element).filter(key => checkedColumns.includes(key));
+    //         const sortedObj = Object.fromEntries(
+    //             keys.map(key => [key, element[key]])
+    //         );
+    //         profilesNew.push(sortedObj)
+    //     }
+    //     setProfiles(profilesNew)    
+    // }
+
+
     useEffect(() => {
 
         const row = localStorage.getItem('columns' || [])
         setRow(JSON.parse(row))
-        checkedColumnsNew()
+        // checkedColumnsNew()
     }, [])
-    console.log(profiles)
-
+    // console.log(profiles)
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -171,8 +176,6 @@ function AppTable() {
                                                     <img src={profile.image} alt="" />
                                                 </TableCell>
                                             </Tooltip>}
-
-
 
                                         </TableRow>
                                     );
