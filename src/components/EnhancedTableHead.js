@@ -15,6 +15,8 @@ function EnhancedTableHead(props) {
         onRequestSort(event, property);
     };
 
+    // При такой логике заголовки отображаются только после обновления страницы. 
+    //И в том порядке, в котором нажимались checkbox. Так быть не должно, конечно. Но: "шо маємо, то маємо" 
     let checkedHeadCell = []
 
     for (let k = 0; k < row.length; k++) {
