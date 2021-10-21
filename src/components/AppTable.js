@@ -55,11 +55,6 @@ function AppTable() {
     const [row, setRow] = useState([]);
     let history = useHistory();
 
-
-    // Неудачная попытка отфильтровать массив profiles  
-    // Через MySQL просто написала бы команду "SELECT checkedColumns FROM profiles", 
-    // и повесила бы функцию на кнопку Aply, но я пошла другим путем и заблудилась.
-
     // let profilesNew = [];
 
     // const checkedColumnsNew = () => {
