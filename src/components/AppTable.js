@@ -37,10 +37,7 @@ function stableSort(array, comparator) {
         const order = comparator(a[0], b[0]);
         if (order !== 0) {
             return order;
-        }
-        if (typeof (Number(a[1])) === 'number') {
-            return Number(a[1]) - Number(b[1])
-        }
+        }    
 
         return a[1] - b[1]
 
