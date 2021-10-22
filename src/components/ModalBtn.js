@@ -47,8 +47,7 @@ function ModalBtn() {
     };
 
     const headCheckedBtn = () => {
-        setHeadCheck(headCells.filter(item => item.checked))
-        localStorage.setItem('columns', JSON.stringify(headCheck))
+        setHeadCheck(headCells.filter(item => item.checked))        
     }
 
 
