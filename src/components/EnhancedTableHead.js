@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import TableCell from '@mui/material/TableCell';
@@ -6,26 +6,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import { visuallyHidden } from '@mui/utils';
-import headCells from './headCells';
+import Context from './context';
 
 function EnhancedTableHead(props) {
-    const { order, orderBy, onRequestSort, row } =
+    const { order, orderBy, onRequestSort } =
         props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
     };
 
-    let checkedHeadCell = []
-
-    for (let k = 0; k < row.length; k++) {
-
-        for (let i = 0; i < headCells.length; i++) {
-            if (row[k].id === headCells[i].id) {
-                checkedHeadCell.push(headCells[i])
-            }
-
-        }
-    }
+    const { headCheck } = useContext(Context)
 
     return (
         <TableHead>
@@ -33,7 +23,7 @@ function EnhancedTableHead(props) {
                 <TableCell padding="checkbox">
 
                 </TableCell>
-                {checkedHeadCell.map((headCell) => (
+                {headCheck.map((headCell) => (
                     <TableCell
 
                         key={headCell.id}

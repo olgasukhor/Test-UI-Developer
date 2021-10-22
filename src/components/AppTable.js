@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -38,6 +38,10 @@ function stableSort(array, comparator) {
         if (order !== 0) {
             return order;
         }
+        if (typeof (Number(a[1])) === 'number') {
+            return Number(a[1]) - Number(b[1])
+        }
+
         return a[1] - b[1]
 
     });
@@ -45,44 +49,14 @@ function stableSort(array, comparator) {
 }
 
 function AppTable() {
-    const { profiles, setProfiles } = useContext(Context);
+    const { newProfiles } = useContext(Context);
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('profileName');
     const [selected, setSelected] = useState([]);
     const [page, setPage] = useState(0);
     const [dense, setDense] = useState(false);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [row, setRow] = useState([]);
     let history = useHistory();
-
-    // let profilesNew = [];
-
-    // const checkedColumnsNew = () => {
-    //     let element = [];
-    //     for (let i = 0; i < row.length; i++) {
-    //         element.push(row[i].id)
-    //     }
-    //     let checkedColumns = element.join(', ');
-
-    //     for (let i = 0; i < profiles.length; i++) {
-    //         const element = profiles[i];
-    //         const keys = Object.keys(element).filter(key => checkedColumns.includes(key));
-    //         const sortedObj = Object.fromEntries(
-    //             keys.map(key => [key, element[key]])
-    //         );
-    //         profilesNew.push(sortedObj)
-    //     }
-    //     setProfiles(profilesNew)    
-    // }
-
-
-    useEffect(() => {
-
-        const row = localStorage.getItem('columns' || [])
-        setRow(JSON.parse(row))
-        // checkedColumnsNew()
-    }, [])
-    // console.log(profiles)
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -92,7 +66,7 @@ function AppTable() {
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
-            const newSelecteds = profiles.map((profile) => profile.profileName);
+            const newSelecteds = newProfiles.map((profile) => profile.profileName);
             setSelected(newSelecteds);
             return;
         }
@@ -115,7 +89,7 @@ function AppTable() {
 
 
     const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - profiles.length) : 0;
+        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - newProfiles.length) : 0;
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -133,12 +107,11 @@ function AppTable() {
                             orderBy={orderBy}
                             onSelectAllClick={handleSelectAllClick}
                             onRequestSort={handleRequestSort}
-                            rowCount={profiles.length}
-                            row={row}
+                            rowCount={newProfiles.length}
                         />
                         <TableBody>
 
-                            {stableSort(profiles, getComparator(order, orderBy))
+                            {stableSort(newProfiles, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((profile, index) => {
                                     const labelId = `enhanced-table-checkbox-${index}`;
@@ -146,7 +119,7 @@ function AppTable() {
                                     return (
                                         <TableRow
                                             hover
-                                            key={profile.profileName}
+                                            key={profile.id}
                                         >
                                             <TableCell padding="checkbox">
                                             </TableCell>
@@ -190,7 +163,7 @@ function AppTable() {
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={profiles.length}
+                    count={newProfiles.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onPageChange={handleChangePage}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -9,6 +9,8 @@ import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import headCells from './headCells';
+import Context from './context';
+
 
 
 const style = {
@@ -25,32 +27,36 @@ const style = {
 
 function ModalBtn() {
 
-    const [columns, setColumns] = useState([])
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [checked, setChecked] = useState(false);
+    const { setHeadCheck, headCheck, checkedColumnsBtn } = useContext(Context)
+
+
+
+    const [value, setValue] = useState(null);
+    const [inputValue, setInputValue] = useState('');
+    const [options, setOptions] = useState([]);
 
 
     const onChange = (item, id) => {
         if (item.id === id) {
             setChecked(item.checked = !item.checked)
         }
-        console.log(item.checked)
-        console.log(id)
-        if (item.checked) {
-            setColumns([
-                ...columns,
-                {
-                    id: id,
-                }]
-            )
-        }
-        return columns;
     };
 
+    const headCheckedBtn = () => {
+        setHeadCheck(headCells.filter(item => item.checked))
+        localStorage.setItem('columns', JSON.stringify(headCheck))
+    }
+
+
+
     const handleClick = () => {
-        localStorage.setItem('columns', JSON.stringify(columns))
+        localStorage.setItem('columns', JSON.stringify(headCheck))
+        headCheckedBtn();
+        checkedColumnsBtn();
         handleClose()
     }
 
@@ -80,6 +86,15 @@ function ModalBtn() {
                             id="combo-box-demo"
                             options={headCells}
                             sx={{ width: 300 }}
+                            value={value}
+                            onChange={(event, newValue) => {
+                                setOptions(newValue ? [newValue, ...options] : options);
+                                setValue(newValue);
+                            }}
+                            onInputChange={(event, newInputValue) => {
+                                setInputValue(newInputValue);
+                            }}
+
                             renderInput={(params) =>
                                 <TextField
                                     {...params}
